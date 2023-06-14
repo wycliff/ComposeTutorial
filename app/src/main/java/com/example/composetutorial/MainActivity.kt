@@ -1,5 +1,6 @@
 package com.example.composetutorial
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -58,20 +59,36 @@ fun Greeting(name: String, overallModifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.width(8.dp))
 
         Column {
+            //typography
             Text(
-                text = "Hello ", modifier = overallModifier
+                text = "Hello ", modifier = overallModifier,
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.displaySmall
             )
             // Add a vertical space between the author and message texts
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "$name!")
+
+            //Shape, color
+            Surface(shape = MaterialTheme.shapes.extraSmall, shadowElevation = 5.dp) {
+                Text(
+                    text = "$name!",
+                    color = MaterialTheme.colorScheme.secondary
+                )
+            }
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    name = "Dark Mode"
+)
 @Composable
 fun GreetingPreview() {
     ComposeTutorialTheme {
-        Greeting("Android")
+        Surface {
+            Greeting("Android")
+        }
     }
 }
